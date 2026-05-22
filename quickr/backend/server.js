@@ -526,6 +526,9 @@ io.on('connection', (socket) => {
     console.log('Client disconnected:', socket.id);
   });
 });
+app.get("/", (req, res) => {
+  res.send("QuickR Backend Running 🚀");
+});
 
 // Export for Vercel
 module.exports = app;
