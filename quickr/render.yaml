@@ -1,0 +1,90 @@
+# services:
+#   - type: web
+#     name: quickr-backend
+#     env: node
+#     plan: free
+#     buildCommand: npm install
+#     startCommand: npm start
+#     envVars:
+#       - key: MONGO_URI
+#         value: mongodb+srv://...
+#       - key: JWT_SECRET
+#         value: supersecret
+#   - type: static
+#     name: quickr-admin
+#     env: static
+#     plan: free
+#     buildCommand: npm install && npm run build
+#     publishDir: out
+#     envVars:
+#       - key: NEXT_PUBLIC_API_URL
+#         fromService:
+#           name: quickr-backend
+#           type: web
+#           property: host
+#   - type: static
+#     name: quickr-mobile
+#     env: static
+#     plan: free
+#     buildCommand: npm install && npm run build
+#     publishDir: dist
+#     envVars:
+#       - key: VITE_API_URL
+#         fromService:
+#           name: quickr-backend
+#           type: web
+#           property: host
+
+services:
+  - type: web
+    name: quickr-backend
+    env: node
+    plan: free
+    rootDir: backend
+
+    buildCommand: npm install
+    startCommand: npm start
+
+    envVars:
+      - key: MONGO_URI
+        value: mongodb+srv://...
+
+      - key: JWT_SECRET
+        value: supersecret
+
+      - key: NODE_ENV
+        value: production
+
+  - type: web
+    name: quickr-admin
+    env: static
+    plan: free
+    rootDir: admin-web
+
+    buildCommand: npm install && npm run build
+
+    staticPublishPath: out
+
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          name: quickr-backend
+          type: web
+          property: url
+
+  - type: web
+    name: quickr-mobile
+    env: static
+    plan: free
+    rootDir: mobile-app1
+
+    buildCommand: npm install && npm run build
+
+    staticPublishPath: dist
+
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          name: quickr-backend
+          type: web
+          property: url

@@ -17,6 +17,7 @@ export const MenuProvider = ({ children }) => {
     try {
       setLoading(true);
       const response = await axios.get(`${BASE_URL}/api/menu`);
+      console.log('fetchMenu response length:', Array.isArray(response.data) ? response.data.length : typeof response.data, response.data);
       setMenu(response.data);
       setError(null);
     } catch (err) {

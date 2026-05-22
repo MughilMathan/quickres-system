@@ -376,6 +376,27 @@ app.get('/hotel/table/:tableId', (req, res) => {
 
 mongoose.set('strictQuery', false);
 
+const ensureAdminUser = async () => {
+  const email = process.env.ADMIN_EMAIL || 'admin@abhirami.com';
+  const password = process.env.ADMIN_PASSWORD || 'admin123';
+  const hotelId = process.env.ADMIN_HOTEL_ID || 'abhirami';
+
+  const existingAdmin = await Admin.findOne({ email });
+  if (existingAdmin) {
+    return;
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const admin = new Admin({
+    email,
+    password: hashedPassword,
+    hotelId
+  });
+  await admin.save();
+
+  console.log(`Created admin user ${email}`);
+};
+
 const seedSampleData = async () => {
   const existingAdmin = await Admin.findOne({ email: 'admin@abhirami.com' });
   if (existingAdmin) {
@@ -423,6 +444,7 @@ const connectToMongo = async () => {
         family: 4
       });
       console.log('MongoDB connected');
+      await ensureAdminUser();
       return;
     } catch (err) {
       console.warn('Local MongoDB unavailable, falling back to in-memory MongoDB:', err.message || err);
@@ -440,6 +462,7 @@ const connectToMongo = async () => {
   });
   console.log('Connected to in-memory MongoDB');
   await seedSampleData();
+  await ensureAdminUser();
 };
 
 const startServer = async () => {
@@ -504,4 +527,10 @@ io.on('connection', (socket) => {
   });
 });
 
-startServer();
+// Export for Vercel
+module.exports = app;
+
+// Only start the server if this file is run directly
+if (require.main === module) {
+  startServer();
+}

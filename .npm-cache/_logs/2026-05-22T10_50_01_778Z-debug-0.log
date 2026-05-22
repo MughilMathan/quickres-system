@@ -1,0 +1,23 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.9.0
+2 info using node@v24.14.0
+3 silly config load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 silly config load:file:F:\Quick_R\quickr\admin-web\.npmrc
+5 silly config load:file:C:\Users\GOD\.npmrc
+6 silly config load:file:C:\Users\GOD\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm exec vercel deploy --prebuilt --prod --yes
+8 verbose argv "exec" "--cache" "F:\\Quick_R\\.npm-cache" "--" "vercel" "deploy" "--prebuilt" "--prod" "--yes"
+9 verbose logfile logs-max:10 dir:F:\Quick_R\.npm-cache\_logs\2026-05-22T10_50_01_778Z-
+10 verbose logfile F:\Quick_R\.npm-cache\_logs\2026-05-22T10_50_01_778Z-debug-0.log
+11 silly logfile start cleaning logs, removing 1 files
+12 silly logfile done cleaning log files
+13 silly packumentCache heap:2348810240 maxSize:587202560 maxEntrySize:293601280
+14 http fetch GET 200 https://registry.npmjs.org/vercel 674ms (cache revalidated)
+15 silly packumentCache heap:2348810240 maxSize:587202560 maxEntrySize:293601280
+16 silly packumentCache heap:2348810240 maxSize:587202560 maxEntrySize:293601280
+17 verbose cwd F:\Quick_R\quickr\admin-web
+18 verbose os Windows_NT 10.0.26200
+19 verbose node v24.14.0
+20 verbose npm  v11.9.0
+21 verbose exit 0
+22 info ok

@@ -1,5 +1,10 @@
 // Dynamic URL detection for different environments
 const getBaseUrl = () => {
+  // Use environment variable if provided by Vite
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL;
+  }
+
   // Check if we're in production or development
   if (typeof window !== 'undefined') {
     const protocol = window.location.protocol;
@@ -14,7 +19,7 @@ const getBaseUrl = () => {
     return `${protocol}//${hostname}:5000`;
   }
 
-  // Fallback for server-side rendering
+  // Fallback
   return 'http://localhost:5000';
 };
 
